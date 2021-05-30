@@ -161,18 +161,5 @@ export default class CovidChart {
     }
 
     bindEvents() {
-        document.querySelector('#toggle').addEventListener('click', (event) => {
-            if (this.chart) {
-                this.chart.data.datasets.forEach(dataset => {
-                    Object.keys(dataset._meta).forEach(key => {
-                        const current = !dataset._meta[key].hidden
-                        dataset._meta[key].hidden = current || null
-                    })
-                });
-                try {
-                    this.chart.update();
-                } catch(e){}
-            }
-        });
     }
 }

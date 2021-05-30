@@ -12,6 +12,7 @@ export class HomeController {
         this.currentDate = new Date(dateStr);
         this.chartType = 'case';
         this.chartDuration = -30;
+        this.chartHidden = [];
         this.renderIndex();
     }
 
@@ -53,6 +54,25 @@ export class HomeController {
         if(this.chart) {
             this.chart.destroy();
         }
+
+        if(!this.originalLegendOnClick) {
+            this.originalLegendOnClick = window.Chart.defaults.global.legend.onClick;
+            window.Chart.defaults.global.legend.onClick = (t, e) => {
+                this.originalLegendOnClick.call(this.chart.chart, t, e);
+                setTimeout(() => {
+                    const metaIndex = Object.keys(this.chart.chart.data.datasets[e.datasetIndex]._meta).pop();
+                    if(this.chart.chart.data.datasets[e.datasetIndex]._meta[metaIndex].hidden) {
+                        this.chartHidden.push(e.datasetIndex);
+                    } else {
+                        const index = this.chartHidden.indexOf(e.datasetIndex);
+                        if(index > 0) {
+                            this.chartHidden.splice(index, 1);
+                        }
+                    }
+                }, 1);
+            }
+        }
+
         this.chart = new CovidChart(
             this.app,
             document.getElementById('chart'),
@@ -61,6 +81,17 @@ export class HomeController {
             this.chartType,
             state,
         );
+
+        setTimeout(() => {
+            this.chartHidden.forEach(index => {
+                const metaIndex = Object.keys(this.chart.chart.data.datasets[index]._meta).pop();
+                this.chart.chart.data.datasets[index]._meta[metaIndex].hidden = true;
+            });
+            this.chart.chart.update();
+        }, 1);
+
+        document.getElementById('chart-duration').value = this.chartDuration;
+        document.getElementById('chart-type').value = this.chartType;
     }
 
     loadDatatable() {
@@ -133,6 +164,30 @@ export class HomeController {
         document.getElementById('chart-type').addEventListener('change', e => {
             this.chartType = e.target.value, 10;
             this.loadChart();
+        });
+
+        document.querySelector('#toggle').addEventListener('click', (event) => {
+            if (this.chart) {
+                this.chart.chart.data.datasets.forEach((dataset, index) => {
+                    Object.keys(dataset._meta).forEach(key => {
+                        const current = !dataset._meta[key].hidden
+                        dataset._meta[key].hidden = current || null;
+                        if(dataset._meta[key].hidden) {
+                            if(this.chartHidden.indexOf(index) == -1) {
+                                this.chartHidden.push(index);
+                            }
+                        } else {
+                            const chartHiddenIndex = this.chartHidden.indexOf(index);
+                            if(chartHiddenIndex > -1) {
+                                this.chartHidden.splice(chartHiddenIndex, 1);
+                            }
+                        }
+                    })
+                });
+                try {
+                    this.chart.chart.update();
+                } catch(e){}
+            }
         });
     }
 
