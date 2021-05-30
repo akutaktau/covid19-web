@@ -26,6 +26,7 @@ export class HomeController {
         this.stateDataContainer = document.getElementById('state-data');
         this.loadDatatable();
         this.loadChart();
+        this.loadTwitter();
         this.bindHomeEvents();
     }
 
@@ -106,6 +107,10 @@ export class HomeController {
         }
 
         this.datatable = new CovidDatatable(this.app, this.currentDate, document.getElementById('datatable'));
+    }
+
+    loadTwitter() {
+        window.twttr && window.twttr.widgets.load()
     }
 
     bindHomeEvents() {
