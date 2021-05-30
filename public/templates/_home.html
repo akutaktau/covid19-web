@@ -1,0 +1,60 @@
+<nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
+    <div class="container"><a class="navbar-brand logo" href="#/">Covid-19</a>
+    </div>
+</nav>
+<main class="page lanidng-page">
+    <section class="portfolio-block portfolio">
+        <div class="container">
+            <h3 class="text-center mb-3">Covid-19 Daily Cases for Malaysia.</h3>
+
+            <div class="row align-items-start">
+                <form class="row">
+                    <div class="col">
+                        <label for="from">From :</label>
+                        <input type="date" id="from" value="{{from}}" class="form-control form-control-sm">
+                    </div>
+                    <div class="col">
+                        <label for="to">To :</label>
+                        <input type="date" id="to" value="{{to}}" class="form-control form-control-sm">
+                    </div>
+                    <div class="row align-items-bottom">
+                        <div class="col">
+                            <button id="submit" class="btn btn-primary btn-lg d-block w-100 mt-3">Filter</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section class="portfolio-block photography">
+        <div class="container">
+            <div class="row align-items-bottom">
+                <div class="col">
+                    <canvas id="chart"></canvas>
+                    <div>
+                        <button id="toggle" class="btn btn-primary col-xs-1 mx-auto d-block mt-2">Invert Selection</button>
+                    </div>
+                    <br />
+                </div>
+                <div class="col">
+                    {{#states}}
+                    <a href="#/{{.}}" data-navigo>{{.}}</a> |
+                    {{/states}}
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="page-footer gradient">
+        <div class="container">
+            <div class="links">Contact me</div>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/jasdy.syarman/" target="_blank">
+                    <img src="/images/fb.svg " alt="">
+                </a>
+                <a href="https://twitter.com/aku_tak_tau" target="_blank">
+                    <img src="/images/twitter.svg " alt="">
+                </a>
+            </div>
+        </div>
+    </footer>
+</main>

@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #e1e8eb;
+}
+
+.widget {
+    @apply border;
+}
+
+.number-stat {
+    @apply  bg-blue-900 text-gray-50 text-center p-4;
+}
+
+.date-container {
+    label {
+        margin-right: 0.25rem;
+    }
+
+    input[type=date] {
+        @apply py-1 px-4 border;
+    }
+
+    button {
+        @apply pt-1 pb-2 text-white bg-blue-800 block px-4;
+    }
+}
+
+.map-container {
+
+    #malmap {
+        path {
+            fill: darken(red, 20%);
+        }
+
+        path:hover {
+            fill: darken(red, 30%);
+            cursor: pointer;
+        }
+    }
+}
+
+#content > .container {
+    padding-top: 6.5rem;
+}
+
+.dataTable-bottom {
+    display: none!important;
+}
+
+@media (min-width: 768px) {
+    #content > .container {
+        padding-top: 4.5rem;
+    }
+}
+@media (min-width: 1280px) {
+    .container {
+        width: 1240px;
+    }
+}
