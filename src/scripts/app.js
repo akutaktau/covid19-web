@@ -153,8 +153,8 @@ class CovidApp {
         router.init(null, () => {});
     }
 
-    loadView(templateName, data) {
-        this.container.innerHTML = window.templates[templateName].render(data || {});
+    loadView(templateName, data, partials) {
+        this.container.innerHTML = window.templates[templateName].render(data || {}, partials || {});
     }
 
     smooth(arr, windowSize, getter = (value) => value, setter) {

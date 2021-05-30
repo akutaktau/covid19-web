@@ -20,6 +20,8 @@ export class HomeController {
         this.app.loadView('home', {
             date: this.currentDate.toISOString().substr(0, 10),
             stats: this.calculateStats(),
+        }, {
+            malmap: window.templates['mal-map'],
         });
         this.stateDataContainer = document.getElementById('state-data');
         this.loadDatatable();
