@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta property="og:title" content="Covid-19 : Daily cases for Malaysia.">
+    <meta property="og:description" content="Daily new Covid-19 cases for states in Malaysia.">
+    <meta property="og:image" content="http://covid19.coders.my/assets/img/meta.PNG">
+    <meta property="og:url" content="http://covid19.coders.my">
+    <meta name="twitter:title" content="Covid-19 : Daily cases for Malaysia. ">
+    <meta name="twitter:description" content=" Daily new Covid-19 cases for states in Malaysia.">
+    <meta name="twitter:image" content=" http://covid19.coders.my/assets/img/meta.PNG">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Covid-19 : Daily cases for Malaysia.</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/pepper-grinder/jquery-ui.min.css
+">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/pepper-grinder/theme.min.css">
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
+        <div class="container"><a class="navbar-brand logo" href="#">Covid-19</a>
+        </div>
+    </nav>
+    <main class="page lanidng-page">
+        <section class="portfolio-block portfolio">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <center><h3>Covid-19 Daily Cases for Malaysia.</h3></center>
+                    </div>
+                </div>
+                
+                <div class="row align-items-start">
+                  
+                    <form class="row">
+                        <div class="col">
+                            <label for="from">From :</label> 
+                            <input type="text" id="from" class="form-control form-control-sm">
+                        </div> 
+                        <div class="col">
+                            <label for="to">To :</label> 
+                            <input type="text" id="to" class="form-control form-control-sm">
+                        </div> 
+                        <div class="row align-items-bottom">
+                        <div class="col">
+                            <br />
+                            <center>
+                                <button id="submit" class="btn btn-primary btn-lg d-block w-100">Filter</button>
+                            </center>
+                        </div>
+                    </div>
+                    </form>
+                   
+                </div>
+                
+                
+            </div>
+        </section>
+        <section class="portfolio-block photography">
+            <div class="container">
+                
+                <div class="row align-items-bottom">
+                    <div class="col">
+                        <canvas id="chart"></canvas>             
+                        <center>
+                            <button id="toggle" class="btn btn-primary col-xs-1">Invert Selection</button>
+                        </center>
+                        <br />
+                    </div>
+               
+                </div>
+                
+            </div>
+        </section>
+        <footer class="page-footer gradient">
+            <div class="container">
+                <div class="links">Contact me</div>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/jasdy.syarman/" target="_blank">
+                        <i class="icon ion-social-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com/aku_tak_tau" target="_blank">
+                        <i class="icon ion-social-twitter"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.0/Chart.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+    
+    <script>
+        
+        
+        function generateChart(startDate,endDate){
+            var labels = [];
+            var perlis = [];
+            var kedah = [];
+            var penang = [];
+            var perak = [];
+            var selangor = [];
+            var kualalumpur = [];
+            var sembilan = [];
+            var melaka = [];
+            var johor = [];
+            var kelantan = [];
+            var terengganu = [];
+            var pahang = [];
+            var putrajaya = [];
+            var sabah = [];
+            var sarawak = [];
+            var labuan = [];
+            
+            start = startDate.split("-");
+            end = endDate.split("-");
+            
+            var d1 = new Date(start[0],parseInt(start[1]),parseInt(start[2]));
+            var d2 = new Date(end[0],parseInt(end[1]),parseInt(end[2]));
+            
+            $.getJSON("https://raw.githubusercontent.com/akutaktau/covid-19-data/main/covid-19-states-daily-cases.json", function(data) {
+               
+                
+                $.each( data, function( i, v ) {
+                    
+                    curr = v.date;
+                    curSplit = curr.split("-");
+                    d3 = new Date(curSplit[0],parseInt(curSplit[1]),parseInt(curSplit[2]));
+                    
+                    if(d3 >= d1 && d3 <= d2) {
+                    
+                        $.each(v, function (key, val) {
+                            
+                             
+                            if(key == 'date') {
+                                labels.push(val)
+                            
+                            }
+                            else {
+                                if(key == "perlis") {
+                                    perlis.push(val);
+                                                            
+                                }
+                                
+                                if(key == "kedah") {
+                                    kedah.push(val);
+                                                            
+                                }
+                                
+                                if(key == "perak") {
+                                    perak.push(val);
+                                                            
+                                }
+                                if(key == "pulau-pinang") {
+                                    penang.push(val);
+                                                            
+                                }
+                                if(key == "selangor") {
+                                    selangor.push(val);
+                                                            
+                                }
+                                if(key == "wp-kuala-lumpur") {
+                                    kualalumpur.push(val);
+                                                            
+                                }
+                                if(key == "negeri-sembilan") {
+                                    sembilan.push(val);
+                                                            
+                                }
+                                if(key == "melaka") {
+                                    melaka.push(val);
+                                                            
+                                }
+                                if(key == "johor") {
+                                    johor.push(val);
+                                                            
+                                }
+                                if(key == "pahang") {
+                                    pahang.push(val);
+                                                            
+                                }
+                                if(key == "terengganu") {
+                                    terengganu.push(val);
+                                                            
+                                }
+                                if(key == "kelantan") {
+                                    kelantan.push(val);
+                                                            
+                                }
+                                if(key == "wp-putrajaya") {
+                                    putrajaya.push(val);
+                                                            
+                                }
+                                if(key == "sabah") {
+                                    sabah.push(val);
+                                                            
+                                }
+                                if(key == "sarawak") {
+                                    sarawak.push(val);
+                                                            
+                                }
+                                if(key == "wp-labuan") {
+                                    labuan.push(val);
+                                                            
+                                }
+                                
+                            }
+                            
+                        })
+                    
+                    }
+                });
+                
+                
+                
+                var ctx = $('#chart');
+                
+                if(ctx.width() < 400){
+                    ctx.height(500);
+                    
+                }
+                                     
+                const chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: "Johor",
+                                data: johor,
+                                
+                            },
+                            {
+                                label: "Kedah",
+                                data: kedah,
+                                
+                            },                        
+                            {
+                                label: "Kelantan",
+                                data: kelantan,
+                                
+                            },
+                            {
+                                label: "Kuala Lumpur",
+                                data: kualalumpur,
+                                
+                            },
+                            {
+                                label: "Labuan",
+                                data: labuan,
+                               
+                            },  
+                            {
+                                label: "Melaka",
+                                data: melaka,
+                               
+                            }, 
+                            {
+                                label: "Negeri Sembilan",
+                                data: sembilan,
+                               
+                            },
+                            {
+                                label: "Pahang",
+                                data: pahang,
+                               
+                            }, 
+                            {
+                                label: "Perak",
+                                data: perak,
+                               
+                            }, 
+                            {
+                                label: "Perlis",
+                                data: perlis,
+                               
+                            }, 
+                            {
+                                label: "Pulau Pinang",
+                                data: penang,
+                               
+                            }, 
+                            {
+                                label: "Putrajaya",
+                                data: putrajaya,
+                               
+                            }, 
+                            {
+                                label: "Selangor",
+                                data: selangor,
+                               
+                            }, 
+                            {
+                                label: "Terengganu",
+                                data: terengganu,
+                               
+                            },
+                            {
+                                label: "Sabah",
+                                data: sabah,
+                               
+                            },   
+                            {
+                                label: "Sarawak",
+                                data: sabah,
+                               
+                            },   
+                     
+                        ]
+                    },
+                    options: {
+                        responsive: 'true',
+                        maintainAspectRatio: false,
+                        plugins: {
+
+                            colorschemes: {
+
+                                scheme: 'brewer.Paired12'
+
+                            }
+                        },
+                        legend : {
+                            display:true,
+                            position:"bottom",
+                        }
+                    }
+                });
+                $("#toggle").click(function() {
+                    chart.data.datasets.forEach(dataset => {
+                      Object.keys(dataset._meta).forEach(key => {
+                        const current = !dataset._meta[key].hidden
+                        dataset._meta[key].hidden = current || null
+                      })
+                    });
+                    chart.update();
+                    
+                });
+            });
+        }
+        
+        var todayDate = new Date();
+        var currMonth = todayDate.getMonth()+1;
+        today = todayDate.getFullYear()+'-'+ currMonth+'-'+todayDate.getDate();
+        startMonth = todayDate.getFullYear()+'-'+currMonth +'-01';
+        
+        generateChart(startMonth,today);
+        
+        new Litepicker({
+          element: document.getElementById('from'),
+          startDate: new Date(todayDate.getFullYear(),todayDate.getMonth(),"01"),
+          setup: (picker) => {
+
+            picker.on('show', () => {
+              let date = picker.getDate();
+              if (date) {
+                date.setMonth(date.getMonth());
+                picker.gotoDate(date);
+              }
+            });
+
+          }
+        });
+        
+        new Litepicker({
+          element: document.getElementById('to'),
+          startDate: new Date(),
+          setup: (picker) => {
+
+            picker.on('show', () => {
+              let date = picker.getDate();
+              if (date) {
+                date.setMonth(date.getMonth());
+                picker.gotoDate(date);
+              }
+            });
+
+          }
+        })
+        
+        $("#submit").click(function(e){
+           // console.log($("from").val());
+           e.preventDefault();
+           
+            generateChart($("#from").val(),$("#to").val());
+        });
+        
+        
+        
+    </script>
+    
+</body>
+
+</html>
