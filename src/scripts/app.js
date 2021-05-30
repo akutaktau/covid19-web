@@ -1,11 +1,9 @@
 import { HomeController } from './controllers.js';
 import { Router } from './router.js';
-const Hogan = require('hogan.js');
 
 class CovidApp {
 
     controllers = {};
-    templates = {};
     data = [];
     rawData = [];
     container;
@@ -16,16 +14,8 @@ class CovidApp {
     }
 
     async initialize() {
-        this.getTemplates();
         await this.getData();
         this.initializeRouter();
-    }
-
-    getTemplates () {
-        const templateElements = document.querySelectorAll('script[type=template]');
-        templateElements.forEach((t) => {
-            this.templates[t.getAttribute('page')] = Hogan.compile(t.innerHTML);
-        });
     }
 
     async getData() {
@@ -189,7 +179,8 @@ class CovidApp {
     }
 
     loadView(templateName, data) {
-        this.container.innerHTML = this.templates[templateName].render(data || {});
+        this.container.innerHTML = window.templates[templateName].render(data || {});
+    }
     }
 }
 
