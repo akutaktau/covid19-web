@@ -1,6 +1,7 @@
 const mix = require('laravel-mix');
 require('./mix/hulk');
 const tailwindcss = require('tailwindcss');
+var path = require('path');
 
 mix.sass('src/styles/app.scss', 'public/styles')
     .js('src/scripts/app.js', 'public/scripts')
@@ -9,7 +10,7 @@ mix.sass('src/styles/app.scss', 'public/styles')
         postCss: [ tailwindcss('./tailwind.config.js') ],
     })
     .browserSync({
-        proxy: 'http://covid.localtest.me/',
+        server: { baseDir: ['public'] },
         files: [
             'src/**/*.*',
             'public/index.html',

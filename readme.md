@@ -2,8 +2,6 @@
 
 To start development:
 
-- Make sure covid.localtest.me is pointing to the public directory
-- If you're not using covid.localtest.me, make sure you update the proxy setting on `webpack.mix.js`
 - `npm install`
 - `npm run watch`
 
