@@ -4,44 +4,6 @@ export default class CovidChart {
         labels: [],
     };
 
-    dataKeys = {
-        'perlis': 'perlis',
-        'kedah': 'kedah',
-        'perak': 'perak',
-        'pulau-pinang': 'penang',
-        'selangor': 'selangor',
-        'wp-kuala-lumpur': 'kualalumpur',
-        'negeri-sembilan': 'sembilan',
-        'melaka': 'melaka',
-        'johor': 'johor',
-        'pahang': 'pahang',
-        'terengganu': 'terengganu',
-        'kelantan': 'kelantan',
-        'wp-putrajaya': 'putrajaya',
-        'sabah': 'sabah',
-        'sarawak': 'sarawak',
-        'wp-labuan': 'labuan',
-    }
-
-    dataLabels = {
-        'Johor': 'johor',
-        'Kedah': 'kedah',
-        'Kelantan': 'kelantan',
-        'Kuala Lumpur': 'kualalumpur',
-        'Labuan': 'labuan',
-        'Melaka': 'melaka',
-        'Negeri Sembilan': 'sembilan',
-        'Pahang': 'pahang',
-        'Perak': 'perak',
-        'Perlis': 'perlis',
-        'Pulau Pinang': 'penang',
-        'Putrajaya': 'putrajaya',
-        'Selangor': 'selangor',
-        'Terengganu': 'terengganu',
-        'Sabah': 'sabah',
-        'Sarawak': 'sarawak',
-    }
-
     constructor(
         app,
         canvas,
@@ -66,16 +28,7 @@ export default class CovidChart {
         this.endDate = endDate;
 
         // show only one state chart
-        if(dataScope && this.dataLabels[dataScope]) {
-            // contoh dataScope = Kuala Lumpur;
-            this.dataScope = Object.keys(this.dataKeys)
-                .filter(key => this.dataKeys[key] == this.dataLabels[dataScope])
-                .pop();
-
-            const originalValue = this.dataLabels[dataScope];
-            this.dataLabels = {};
-            this.dataLabels[dataScope] = originalValue;
-        }
+        // @todo
 
         // build chart
         this.filterRange();
