@@ -43,6 +43,9 @@ export default class CovidDatatable {
     }
 
     destroy() {
+        if(this.datatable) {
+            this.datatable.destroy();
+        }
         this.container.innerHTML = '';
     }
 }
