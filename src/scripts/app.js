@@ -34,7 +34,7 @@ class CovidApp {
             melaka: { name: 'Melaka', abbr: 'MLK', data: {}, pop: 935600, },
             'negeri-sembilan': { name: 'N. Sembilan', abbr: 'NSN', data: {}, pop: 1130400, },
             pahang: { name: 'Pahang', abbr: 'PHG', data: {}, pop: 1683300, },
-            perak: { name: 'Pahang', abbr: 'PRK', data: {}, pop: 2510200, },
+            perak: { name: 'Perak', abbr: 'PRK', data: {}, pop: 2510200, },
             perlis: { name: 'Perlis', abbr: 'PLS', data: {}, pop: 255300, },
             'pulau-pinang': { name: 'Pulau Pinang', abbr: 'PNG', data: {}, pop: 1776700, },
             sabah: { name: 'Sabah', abbr: 'SBH', data: {}, pop: 3912600, },
