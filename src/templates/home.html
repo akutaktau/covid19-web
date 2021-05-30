@@ -87,7 +87,7 @@
         </div>
 
         <div class="col-span-12 md:col-span-12 widget shadow-md">
-            <div class="bg-blue-800 p-3 text-white md:flex md:justify-between">
+            <div class="bg-blue-900 p-3 text-white md:flex md:justify-between">
                 <p class="text-xl hidden md:block">
                     Carta Data Covid
                 </p>
@@ -104,13 +104,15 @@
                         <option value="per100k">Kes / 100K</option>
                         <option value="rt">Rt</option>
                     </select>
-                    <button id="toggle" type="button" class="bg-gray-200 text-lg px-3">
-                        ⟳
-                    </button>
                 </div>
             </div>
             <div class="bg-white p-3 pt-5">
                 <canvas id="chart"></canvas>
+                <div class="flex justify-end">
+                    <button id="toggle" type="button" class="bg-gray-200 text-lg px-3 mr-3">
+                        ⟳
+                    </button>
+                </div>
             </div>
         </div>
 

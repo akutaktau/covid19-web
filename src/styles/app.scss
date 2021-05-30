@@ -50,6 +50,36 @@ body {
     padding-top: 6.5rem;
 }
 
+.dataTable-table {
+    th, &>tfoot>tr>th, &>thead>tr>th {
+        text-align: left;
+    }
+    &>tbody>tr {
+        &>td, &>th {
+            text-align: right;
+        }
+
+        td:first-child {
+            font-weight: bold;
+            text-align: left;
+        }
+
+        td {
+            border-bottom: 1px solid #e2e2e2;
+        }
+
+        td {
+            border-bottom: 1px solid #e2e2e2;
+        }
+    }
+
+    tbody tr:nth-child(odd) {
+        td {
+            background-color: eff1f5;
+        }
+    }
+}
+.dataTable-top,
 .dataTable-bottom {
     display: none!important;
 }
