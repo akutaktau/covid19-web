@@ -36,11 +36,13 @@ body {
 
     #malmap {
         path {
-            fill: darken(red, 20%);
+            fill: #ca8830;
+            stroke-width: 0.5;
+            stroke: rgba(0, 0, 0, 0.5);
         }
 
         path:hover {
-            fill: darken(red, 30%);
+            fill: rgb(13, 39, 124);
             cursor: pointer;
         }
     }
