@@ -14,7 +14,7 @@ export default class CovidDatatable {
         if(this.datatable) {
             this.datatable.destroy();
         }
-        this.container.innerHTML = '<table><thead><tr><th>Negeri</th><th>Kes Baru</th><th>Kes / 100K</th><th>Rt<sup>*</sup></th></tr></thead><tbody></tbody></table>';
+        this.container.innerHTML = '<table><thead><tr><th>Negeri</th><th>Kes Baru</th><th>Kes / 100K</th><th>Rt</th></tr></thead><tbody></tbody></table>';
         const tbody = this.container.querySelector('tbody');
 
         let rows = [];
