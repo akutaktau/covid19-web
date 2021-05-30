@@ -48,16 +48,15 @@ class CovidApp {
 
         this.data = [];
         const accumulatives = {};
-        const dailyCases = {};
-        const rnaughts = {};
-        const dailyCaseRunningAverage = 7;
-        const rnaughtRunningAverage = 14;
-
+        let yesterdayStr = null;
+        let date = null;
+        let dateStr = null;
         this.rawData.forEach(rawData => {
-            let date = null;
-            let dateStr = null;
             Object.keys(rawData).forEach(key => {
                 if(key == 'date') {
+                    if(dateStr) {
+                        yesterdayStr = dateStr;
+                    }
                     date = new Date(rawData[key]);
                     dateStr = date.toISOString();
                 } else {
@@ -68,55 +67,22 @@ class CovidApp {
                     if(!accumulatives[key]) {
                         accumulatives[key] = 0;
                     }
-                    if(!dailyCases[key]) {
-                        dailyCases[key] = [];
-                    }
-                    if(!rnaughts[key]) {
-                        rnaughts[key] = [];
-                    }
 
                     const newCase = rawData[key];
 
-                    let dca = 0;
-                    let rnaught = 0;
-                    if(dailyCases[key].length > dailyCaseRunningAverage - 1) {
-                        dca = dailyCases[key].reduce((pv, cv) => pv + cv, 0) / dailyCases[key].length;
-
-                        if(isNaN(dca) || !isFinite(dca)) {
-                            dca = 0;
+                    let r0 = 0;
+                    if(yesterdayStr && states[key].data[yesterdayStr]) {
+                        r0 = newCase / states[key].data[yesterdayStr].new;
+                        if(!isFinite(r0)) {
+                            r0 = 0;
                         }
-
-                        rnaught = newCase / dca;
-                        if(isNaN(rnaught) || !isFinite(rnaught)) {
-                            rnaught = 0;
-                        }
-                    }
-
-                    dailyCases[key].push(newCase);
-                    if(dailyCases[key].length > dailyCaseRunningAverage) {
-                        dailyCases[key].shift();
-                    }
-
-                    let rt = 0;
-
-                    if(rnaughts[key].length > rnaughtRunningAverage - 1) {
-                        rt = rnaughts[key].reduce((pv, cv) => pv + cv, 0) / rnaughts[key].length;
-                        if(isNaN(rt) || !isFinite(rt)) {
-                            rt = 0;
-                        }
-                    }
-
-                    rnaughts[key].push(rnaught);
-                    if(rnaughts[key].length > rnaughtRunningAverage) {
-                        rnaughts[key].shift();
                     }
 
                     accumulatives[key] = accumulatives[key] + newCase;
                     states[key].data[dateStr] = {
                         new: newCase,
-                        dca,
-                        r0: rnaught,
-                        rt,
+                        r0,
+                        rt: 0,
                         accu: accumulatives[key],
                         per100k: accumulatives[key] / states[key].pop * 100000,
                         date,
@@ -134,7 +100,16 @@ class CovidApp {
 
         let totalPop = 0;
         Object.keys(states).forEach(k => {
+            // calculate rt
+            let rts = this.smooth(Object.keys(states[k].data).map(d => states[k].data[d].r0), 14);
+            Object.keys(states[k].data).forEach((d, index) => {
+                states[k].data[d].rt = rts[index] ?? 0;
+            });
+
+            // calculate total population
             totalPop += states[k].pop;
+
+            // set latestData
             states[k].latestData = states[k].data[Object.keys(states[k].data).pop()];
         });
         my.pop = totalPop;
@@ -181,6 +156,27 @@ class CovidApp {
     loadView(templateName, data) {
         this.container.innerHTML = window.templates[templateName].render(data || {});
     }
+
+    smooth(arr, windowSize, getter = (value) => value, setter) {
+        const get = getter
+        const result = []
+
+        for (let i = 0; i < arr.length; i += 1) {
+          const leftOffset = i - windowSize
+          const from = leftOffset >= 0 ? leftOffset : 0
+          const to = i + windowSize + 1
+
+          let count = 0
+          let sum = 0
+          for (let j = from; j < to && j < arr.length; j += 1) {
+            sum += get(arr[j])
+            count += 1
+          }
+
+          result[i] = setter ? setter(arr[i], sum / count) : sum / count
+        }
+
+        return result
     }
 }
 
