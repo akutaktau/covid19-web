@@ -35,12 +35,16 @@ export class HomeController {
             new: 'Tiada Data',
             per100k: 0,
             rt: 0,
+            rtTrend: false,
+            newTrend: false,
         }
         if(this.app.myData.data[fullDateStr]) {
             data = this.app.myData.data[fullDateStr];
         }
         return {
             new: data.new,
+            newTrend: data.newTrend,
+            rtTrend: data.rtTrend,
             per100k: Math.round(data.per100k),
             rt: data.rt.toFixed(2),
         }
@@ -110,6 +114,11 @@ export class HomeController {
         const normalizedOut = document.getElementById('normalizedOut');
         const rtOut = document.getElementById('rtOut');
 
+        const newTrendUp = document.querySelector('.new-trend-up');
+        const newTrendDown = document.querySelector('.new-trend-down');
+        const rtTrendUp = document.querySelector('.rt-trend-up');
+        const rtTrendDown = document.querySelector('.rt-trend-down');
+
         document.querySelectorAll('path').forEach(p => {
             if(!this.stateDataContainer) return;
             p.addEventListener('mouseenter', e => {
@@ -124,6 +133,8 @@ export class HomeController {
                     new: 0,
                     per100k: 0,
                     rt: 0,
+                    newTrend: false,
+                    rtTrend: false,
                 }
 
                 const stateObj = this.app.data.filter(d => d.abbr == id).pop();
@@ -134,6 +145,8 @@ export class HomeController {
                         data.new = stateObj.data[date].new;
                         data.per100k = Math.round(stateObj.data[date].per100k);
                         data.rt = stateObj.data[date].rt.toFixed(2);
+                        data.newTrend = stateObj.data[date].newTrend;
+                        data.rtTrend = stateObj.data[date].rtTrend;
                     }
                 }
 
@@ -141,6 +154,22 @@ export class HomeController {
                 newOut.innerText = data.new;
                 normalizedOut.innerText = data.per100k;
                 rtOut.innerText = data.rt;
+
+                if(data.newTrend) {
+                    newTrendUp.classList.remove('hidden');
+                    newTrendDown.classList.add('hidden');
+                } else {
+                    newTrendUp.classList.add('hidden');
+                    newTrendDown.classList.remove('hidden');
+                }
+
+                if(data.rtTrend) {
+                    rtTrendUp.classList.remove('hidden');
+                    rtTrendDown.classList.add('hidden');
+                } else {
+                    rtTrendUp.classList.add('hidden');
+                    rtTrendDown.classList.remove('hidden');
+                }
 
                 this.stateDataContainer.classList.remove('hidden');
             });

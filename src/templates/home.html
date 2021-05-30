@@ -22,20 +22,24 @@
                     <div class="md:col-span-1">
                         <p class="text-sm font-semibold">Baru</p>
                     </div>
-                    <div class="md:col-span-1">
-                        <p class="text-sm text-right" id="newOut">0</p>
+                    <div class="md:col-span-1 text-right">
+                        <span class="hidden new-trend-up text-red-800">▲</span>
+                        <span class="hidden new-trend-down text-green-800">▼</span>
+                        <p class="text-sm inline" id="newOut">0</p>
                     </div>
                     <div class="md:col-span-1">
                         <p class="text-sm font-semibold">100K</p>
                     </div>
-                    <div class="md:col-span-1">
-                        <p class="text-sm text-right" id="normalizedOut">0</p>
+                    <div class="md:col-span-1 text-right">
+                        <p class="text-sm inline" id="normalizedOut">0</p>
                     </div>
                     <div class="md:col-span-1">
                         <p class="text-sm font-semibold">Rt</p>
                     </div>
-                    <div class="md:col-span-1">
-                        <p class="text-sm text-right" id="rtOut">0</p>
+                    <div class="md:col-span-1 text-right">
+                        <span class="hidden rt-trend-up text-red-800">▲</span>
+                        <span class="hidden rt-trend-down text-green-800">▼</span>
+                        <p class="text-sm inline" id="rtOut">0</p>
                     </div>
                 </div>
             </div>
@@ -45,6 +49,13 @@
         <div class="col-span-12 md:col-span-4 widget number-stat shadow-md">
             <p class="text-2xl">
                 {{stats.new}}
+                {{#stats.newTrend}}
+                    <span class="text-red-800">▲</span>
+                {{/stats.newTrend}}
+                {{^stats.newTrend}}
+                    <span class="text-green-800">▼</span>
+                {{/stats.newTrend}}
+
             </p>
             <p class="follow">
                 Kes Baru
@@ -63,6 +74,12 @@
         <div class="col-span-12 md:col-span-4 widget number-stat shadow-md">
             <p class="text-2xl">
                 {{stats.rt}}
+                {{#stats.rtTrend}}
+                    <span class="text-red-800">▲</span>
+                {{/stats.rtTrend}}
+                {{^stats.rtTrend}}
+                    <span class="text-green-800">▼</span>
+                {{/stats.rtTrend}}
             </p>
             <p class="follow">
                 Rt
