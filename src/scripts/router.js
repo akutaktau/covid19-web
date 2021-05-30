@@ -170,7 +170,7 @@ export class Router {
 
     __bindHashChange() {
         window.onhashchange = function () {
-            this.__listener(location.hash)
+            this.__listener && this.__listener(location.hash)
         }
     }
 
