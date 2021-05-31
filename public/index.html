@@ -13,13 +13,32 @@
     <meta name="twitter:image" content=" http://covid19.coders.my/images/meta.PNG">
     <meta name="twitter:card" content="summary_large_image">
     <title>Covid-19 : Daily cases for Malaysia.</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-datatables@1.6.16/dist/vanilla-dataTables.min.css" integrity="sha256-NVx4elI/uN6Rn/Ym7A74L7GlZydaaiN0UwvYH48xlQM=" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/app.css">
 </head>
 
 <body>
     <div id="content"></div>
+
+    <div class="container mx-auto text-center">
+        <div class="py-8">
+            <div class="border-b-2 border-gray-300 shadow-sm mb-8"></div>
+            <h3 class="text-gray-700 font-sm mb-2 font-medium">Tentang Halaman Web Ini</h3>
+            <p class="text-xs text-gray-700 mb-2">
+                Sumber data kes terbaru diperolehi daripada <a class="text-blue-700 font-medium" href="https://github.com/akutaktau/covid-19-data">repositori Github ini</a>. Data <em>R<sub>t</sub></em> dikira daripada kes aktif terbaru menggunakan kaedah <em>Rolling Average</em> dengan saiz data 14 hari. Data Kes per 100,000 penduduk dikira menggunakan data penduduk mengikut negeri yang diperolehi daripada halaman web DOSM.
+            </p>
+            <p class="text-xs text-gray-700 mb-2">
+                Sebarang aduan / pertanyaan boleh diusulkan kepada saudara <a class="text-blue-700 font-medium" href="https://twitter.com/aku_tak_tau">Jasdy Syarman</a> di halaman Twitter.
+            </p>
+            <p class="text-xs text-gray-700 mb-2">
+                Paparan terbaik pada skrin dengan resolusi 1920px &times; 1080px pada pelayan Microsoft Edge, Google Chrome atau Firefox.
+            </p>
+            <h3 class="text-gray-700 font-sm mt-6 mb-2 font-medium">Penafian</h3>
+            <p class="text-xs text-gray-700">Pihak kami tidak bertanggungjawab terhadap sebarang kehilangan atau kerosakan yang dialami kerana menggunakan maklumat dalam portal ini.</p>
+        </div>
+    </div>
+
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.0/Chart.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script>

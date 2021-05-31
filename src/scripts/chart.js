@@ -89,9 +89,17 @@ export default class CovidChart {
                 }),
             },
             options: {
+                scales: {
+                  y: {
+                    stacked: true,
+                  },
+                  x: {
+                    stacked: true,
+                  },
+                },
                 elements: {
                     line: {
-                        tension: 0
+                        tension: 0.15
                     }
                 },
                 responsive: true,
