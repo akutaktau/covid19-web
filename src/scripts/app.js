@@ -28,22 +28,22 @@ class CovidApp {
 
     processData() {
         const states = {
-            johor: { name: 'Johor', abbr: 'JHR', data: {}, pop: 3795300, },
-            kedah: { name: 'Kedah', abbr: 'KDH', data: {}, pop: 2192800, },
-            kelantan: { name: 'Kelantan', abbr: 'KTN', data: {}, pop: 1923000, },
-            melaka: { name: 'Melaka', abbr: 'MLK', data: {}, pop: 935600, },
-            'negeri-sembilan': { name: 'N. Sembilan', abbr: 'NSN', data: {}, pop: 1130400, },
-            pahang: { name: 'Pahang', abbr: 'PHG', data: {}, pop: 1683300, },
-            perak: { name: 'Perak', abbr: 'PRK', data: {}, pop: 2510200, },
-            perlis: { name: 'Perlis', abbr: 'PLS', data: {}, pop: 255300, },
-            'pulau-pinang': { name: 'Pulau Pinang', abbr: 'PNG', data: {}, pop: 1776700, },
-            sabah: { name: 'Sabah', abbr: 'SBH', data: {}, pop: 3912600, },
-            sarawak: { name: 'Sarawak', abbr: 'SRW', data: {}, pop: 2823300, },
-            selangor: { name: 'Selangor', abbr: 'SGR', data: {}, pop: 6560900, },
-            terengganu: { name: 'Terengganu', abbr: 'TRG', data: {}, pop: 1269700, },
-            'wp-kuala-lumpur': { name: 'W.P. Kuala Lumpur', abbr: 'KUL', data: {}, pop: 1766700, },
-            'wp-labuan': { name: 'W.P. Labuan', abbr: 'LBN', data: {}, pop: 99800, },
-            'wp-putrajaya': { name: 'W.P. Putrajaya', abbr: 'PJY', data: {}, pop: 114900, },
+            johor: { name: 'Johor', abbr: 'JHR', data: {}, pop: 3795300, color: 'rgba(164, 245, 173, 0.44)'},
+            kedah: { name: 'Kedah', abbr: 'KDH', data: {}, pop: 2192800, color: 'rgba(9, 100, 19, 0.61)'},
+            kelantan: { name: 'Kelantan', abbr: 'KTN', data: {}, pop: 1923000, color: 'rgba(180, 77, 141, 0.44)'},
+            melaka: { name: 'Melaka', abbr: 'MLK', data: {}, pop: 935600, color: 'rgba(116, 117, 124, 0.44)' },
+            'negeri-sembilan': { name: 'N. Sembilan', abbr: 'NSN', data: {}, pop: 1130400, color: 'rgba(228, 237, 32, 0.44)'},
+            pahang: { name: 'Pahang', abbr: 'PHG', data: {}, pop: 1683300, color: 'rgba(130, 39, 39, 0.54)' },
+            perak: { name: 'Perak', abbr: 'PRK', data: {}, pop: 2510200, color: 'rgba(237, 122, 32, 0.44)'},
+            perlis: { name: 'Perlis', abbr: 'PLS', data: {}, pop: 255300, color: 'rgba(125, 209, 180, 0.44)'},
+            'pulau-pinang': { name: 'Pulau Pinang', abbr: 'PNG', data: {}, pop: 1776700, color: 'rgba(16, 230, 216, 0.53)'},
+            sabah: { name: 'Sabah', abbr: 'SBH', data: {}, pop: 3912600, color: 'rgba(23, 97, 150, 0.61)'},
+            sarawak: { name: 'Sarawak', abbr: 'SRW', data: {}, pop: 2823300, color: 'rgba(233, 177, 24, 0.43)'},
+            selangor: { name: 'Selangor', abbr: 'SGR', data: {}, pop: 6560900, color: 'rgba(187, 80, 191, 0.42)'},
+            terengganu: { name: 'Terengganu', abbr: 'TRG', data: {}, pop: 1269700, color: 'rgba(20, 133, 238, 0.62)'},
+            'wp-kuala-lumpur': { name: 'W.P. Kuala Lumpur', abbr: 'KUL', data: {}, pop: 1766700, color: 'rgba(237, 32, 124, 0.61)'},
+            'wp-labuan': { name: 'W.P. Labuan', abbr: 'LBN', data: {}, pop: 99800, color: 'rgba(230, 78, 16, 0.53)'},
+            'wp-putrajaya': { name: 'W.P. Putrajaya', abbr: 'PJY', data: {}, pop: 114900, color: 'rgba(16, 29, 230, 0.65)'},
         };
 
         this.data = [];
