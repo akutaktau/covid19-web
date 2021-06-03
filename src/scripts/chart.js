@@ -40,6 +40,7 @@ export default class CovidChart {
         this.chartData = {
             labels: [],
             data: {},
+            colors: []
         };
 
         let masterData = this.app.data;
@@ -57,8 +58,9 @@ export default class CovidChart {
                     }
                     if (!this.chartData.data[stateObject.name]) {
                         this.chartData.data[stateObject.name] = [];
+                        this.chartData.colors.push(stateObject.color);
                     }
-
+                    
                     switch(this.chartType) {
                         case 'case':
                             this.chartData.data[stateObject.name].push(stateObject.data[dateString].new);
@@ -81,10 +83,15 @@ export default class CovidChart {
             type: 'line',
             data: {
                 labels: this.chartData.labels,
-                datasets: Object.keys(this.chartData.data).map(label => {
+                datasets: Object.keys(this.chartData.data).map((label,index) => {
+                    const color = this.chartData.colors[index];
                     return {
                         label,
                         data: this.chartData.data[label],
+                        borderColor: color,
+                        backgroundColor:color,
+                        pointBackgroundColor:color,
+                        pointBorderColor:color
                     }
                 }),
             },
@@ -115,6 +122,7 @@ export default class CovidChart {
                 }
             }
         });
+        
     }
 
     destroy() {
